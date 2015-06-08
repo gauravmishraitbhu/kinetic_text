@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE attributes PUBLIC "-//NetBeans//DTD DefaultAttributes 1.0//EN" "http://www.netbeans.org/dtds/attributes-1_0.dtd">
+<attributes version="1.0">
+    <fileobject name="ImageTest.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="ImageTest"/>
+    </fileobject>
+    <fileobject name="NoNoNoDemo.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="NoNoNoDemo"/>
+    </fileobject>
+    <fileobject name="HopInDemo.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="HopInDemo"/>
+    </fileobject>
+    <fileobject name="KT_Test.java">
+        <attr name="class_dependency_kinetic.util.MovieEncoder.SequenceExportEventListener" stringvalue="KT_Test"/>
+        <attr name="class_dependency_kinetic.util.KTEngineEventListener" stringvalue="KT_Test"/>
+        <attr name="class_dependency_javax.swing.filechooser.FileFilter" stringvalue="KT_Test.dotMovFilter"/>
+        <attr name="class_dependency_java.awt.event.ActionListener" stringvalue="KT_Test.KeyListener"/>
+        <attr name="class_dependency_javax.swing.JFrame" stringvalue="KT_Test"/>
+    </fileobject>
+    <fileobject name="OhBoyDemo.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="OhBoyDemo"/>
+    </fileobject>
+    <fileobject name="HopDemo.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="HopDemo"/>
+    </fileobject>
+    <fileobject name="MoveDemo.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="MoveDemo"/>
+    </fileobject>
+    <fileobject name="MontyPythonDemo.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="MontyPythonDemo"/>
+    </fileobject>
+    <fileobject name="OscillateDemo.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="OscillateDemo"/>
+    </fileobject>
+    <fileobject name="EarlyDemos.java">
+        <attr name="class_dependency_kinetic.util.SequenceBuilder" stringvalue="EarlyDemos"/>
+    </fileobject>
+</attributes>
