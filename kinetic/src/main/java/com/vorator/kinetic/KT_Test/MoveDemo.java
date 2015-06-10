@@ -5,8 +5,9 @@
  */
 
 package com.vorator.kinetic.KT_Test;
-import com.vorator.kinetic.kinetic.*;
-import com.vorator.kinetic.kinetic.util.*;
+import com.vorator.kinetic.engine.*;
+import com.vorator.kinetic.engine.util.*;
+
 import java.awt.*;
 
 /**
@@ -59,7 +60,7 @@ public class MoveDemo implements SequenceBuilder{
         Move.addCastMember(temp_seq);
         word = new KineticString();
         temp_seq.addCastMember(word);
-        word.setString("Move");
+        word.setString("Curve Move");
         word.setPosition(100,200);
         word.setOrientation(KineticObject.BOTTOM_CENTER);
         word.setFont("Arial Black",Font.PLAIN, 40);
@@ -75,7 +76,7 @@ public class MoveDemo implements SequenceBuilder{
         Move.addCastMember(temp_seq);
         word = new KineticString();
         temp_seq.addCastMember(word);
-        word.setString("Move");
+        word.setString("Symetric Curve Move");
         word.setPosition(100,300);
         word.setOrientation(KineticObject.BOTTOM_CENTER);
         word.setFont("Arial Black",Font.PLAIN, 40);
@@ -91,7 +92,7 @@ public class MoveDemo implements SequenceBuilder{
         Move.addCastMember(temp_seq);
         word = new KineticString();
         temp_seq.addCastMember(word);
-        word.setString("Move");
+        word.setString("Move4");
         word.setPosition(100,400);
         word.setOrientation(KineticObject.BOTTOM_CENTER);
         word.setFont("Arial Black",Font.PLAIN, 40);

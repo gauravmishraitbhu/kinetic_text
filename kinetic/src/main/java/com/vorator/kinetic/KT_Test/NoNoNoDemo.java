@@ -2,12 +2,15 @@ package com.vorator.kinetic.KT_Test;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.io.*;
 import java.util.*;
 import java.awt.image.BufferedImage;
-import com.vorator.kinetic.kinetic.*;
-import com.vorator.kinetic.kinetic.util.*;
+
+import com.vorator.kinetic.engine.*;
+import com.vorator.kinetic.engine.util.*;
 
 
 public class NoNoNoDemo implements SequenceBuilder{

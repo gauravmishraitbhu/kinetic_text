@@ -5,8 +5,9 @@
  */
 
 package com.vorator.kinetic.KT_Test;
-import com.vorator.kinetic.kinetic.*;
-import com.vorator.kinetic.kinetic.util.*;
+import com.vorator.kinetic.engine.*;
+import com.vorator.kinetic.engine.util.*;
+
 import java.awt.*;
 
 

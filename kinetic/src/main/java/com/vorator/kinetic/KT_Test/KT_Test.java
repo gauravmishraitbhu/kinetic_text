@@ -5,13 +5,16 @@
  */
 
 package com.vorator.kinetic.KT_Test;
-import com.vorator.kinetic.kinetic.*;
-import com.vorator.kinetic.kinetic.util.*;
-import com.vorator.kinetic.kinetic.util.MovieEncoder.*;
+import com.vorator.kinetic.engine.*;
+import com.vorator.kinetic.engine.util.*;
+import com.vorator.kinetic.engine.util.MovieEncoder.*;
+
 import java.awt.*;
 import java.io.*;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
+
 import java.awt.event.*;
 /**
  *
@@ -98,6 +101,7 @@ public class KT_Test extends javax.swing.JFrame implements KTEngineEventListener
         demos.addItem("Move");
         demos.addItem("Hop");
         demos.addItem("HopIn");
+        demos.addItem("NoNoNo");
         }    
     /** This method is called from within the constructor to
      * initialize the form.
@@ -261,6 +265,12 @@ public class KT_Test extends javax.swing.JFrame implements KTEngineEventListener
             System.out.println("build test");
             engine.setSequenceBuilder(new ImageTest());
             engine.buildAnimation();
+        }
+        
+        if(demo.compareTo("NoNoNo") == 0){
+        	System.out.println("build NoNoNo");
+        	engine.setSequenceBuilder(new NoNoNoDemo());
+        	engine.buildAnimation();
         }
 
         //experimental and under development
