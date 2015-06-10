@@ -50,7 +50,7 @@ public class SequenceExporter implements BufferedImageSource{
         protected BufferedImage bufferedImg2;
         protected Graphics2D graphicsHandle2;
         protected AffineTransform identity = new AffineTransform();
-        protected boolean updateScreen = true;
+        protected boolean updateScreen = false;
         protected int motionBlur = 0;
         protected double lastTime =  0;
         private float layerAlpha = 1.0f;
@@ -72,7 +72,7 @@ public class SequenceExporter implements BufferedImageSource{
                 seq = s;
                 duration = dur*1000;
                 this.frameRate = frameRate;			
-                d = panel.getSize();
+                d = panel != null ? panel.getSize() : new Dimension(640,480);
                 screenRect = new Rectangle(d);
                 bufferedImg1 = new BufferedImage(d.width,d.height,BufferedImage.TYPE_INT_RGB );
                 bufferedImg2 = new BufferedImage(d.width, d.height,BufferedImage.TYPE_INT_RGB);
@@ -101,11 +101,20 @@ public class SequenceExporter implements BufferedImageSource{
         }
 
         public int getWidth(){
-                return panel.getSize().width;
+        	
+        	if( panel == null ){
+        		return 640;
+        	}else{
+        		return panel.getSize().width;
+        	}
         }
 
         public int getHeight(){
-                return panel.getSize().height;
+        	if( panel == null ){
+        		return 480;
+        	}else{
+        		return panel.getSize().height;
+        	}
         }
 
         public float getFrameRate(){
