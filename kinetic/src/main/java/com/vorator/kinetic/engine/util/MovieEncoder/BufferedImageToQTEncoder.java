@@ -33,11 +33,12 @@ import java.awt.geom.*;
 
 import com.sun.image.codec.jpeg.*;
 
+import javax.imageio.ImageIO;
 import javax.media.*;
 import javax.media.control.*;
 import javax.media.protocol.*;
-import javax.media.protocol.DataSource;
 import javax.media.datasink.*;
+import javax.media.format.RGBFormat;
 import javax.media.format.VideoFormat;
 
 /**
@@ -353,6 +354,8 @@ public class BufferedImageToQTEncoder implements ControllerListener, DataSinkLis
 		}
     }
 
+    
+    
 
     /**
      * The source stream to go along with ImageDataSource.
@@ -374,7 +377,11 @@ public class BufferedImageToQTEncoder implements ControllerListener, DataSinkLis
 		    this.height = source.getHeight();
 		    this.source = source;
                     quality = q;
-		    format = new VideoFormat(VideoFormat.JPEG,
+		    setVideoFormat();
+		}
+		
+		protected void setVideoFormat(){
+			format = new VideoFormat(VideoFormat.JPEG,
 					new Dimension(width, height),
 					Format.NOT_SPECIFIED,
 					Format.byteArray,
@@ -409,7 +416,8 @@ public class BufferedImageToQTEncoder implements ControllerListener, DataSinkLis
 		    
 			buffered_img = source.read(frameNumber);
 			frameNumber++;
-			byte data[] = JPEGencodeBufferedImage(buffered_img);
+			byte data[] = getByteArray(buffered_img);
+//			System.out.println((int)data.length);
 			buf.setData(data);
 		    buf.setOffset(0);
 		    buf.setLength((int)data.length);
@@ -418,19 +426,28 @@ public class BufferedImageToQTEncoder implements ControllerListener, DataSinkLis
 		}
 
 
-	    private byte[] JPEGencodeBufferedImage(BufferedImage bufferedImage) {
+	    private byte[] getByteArray(BufferedImage bufferedImage) {
 	    	byte data[] = null;
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
-                JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-                JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bufferedImage);
-                param.setQuality(quality, false);
-                encoder.setJPEGEncodeParam(param);
-                try{
-                    encoder.encode(bufferedImage);
-                    data = out.toByteArray();
-                    out.close();
-                }
-        	catch (Exception x) { x.printStackTrace(); }
+//                JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//                JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bufferedImage);
+//                param.setQuality(quality, false);
+//                encoder.setJPEGEncodeParam(param);
+//                try{
+//                    encoder.encode(bufferedImage);
+//                    data = out.toByteArray();
+//                    out.close();
+//                }
+//        	catch (Exception x) { x.printStackTrace(); }
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                try {
+					ImageIO.write(bufferedImage, "png", baos);
+					data = baos.toByteArray();
+					baos.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         	return data;
 	    }
 
@@ -461,5 +478,54 @@ public class BufferedImageToQTEncoder implements ControllerListener, DataSinkLis
 		public Object getControl(String type) {
 		    return null;
 		}
+    }
+
+    /**
+     * implementation to handle png images with 32 bits
+     *
+     */
+    class PNGImageSourceStream extends ImageSourceStream{
+    	public PNGImageSourceStream(BufferedImageSource source , float q){
+    		super(source, q);
+    	}
+    	
+    	@Override
+    	protected void setVideoFormat(){
+			format = new RGBFormat(new Dimension(width,height),
+					Format.NOT_SPECIFIED,
+					Format.byteArray,
+					source.getFrameRate(),
+					32,
+					1,2,3);
+		}
+    	
+    	
+    	public void read(Buffer buf) throws IOException {
+
+		    // Check if we've finished all the frames.
+		    if (source.endOfMedia()) {
+				// We are done.  Set EndOfMedia.
+				//System.err.println("Done reading images.");
+				buf.setEOM(true);
+				buf.setOffset(0);
+				buf.setLength(0);
+				ended = true;
+				return;
+		    }
+
+		    //System.err.println("reading image " + frameNumber);
+		    
+			buffered_img = source.read(frameNumber);
+			frameNumber++;
+			byte data[] = null; //getByteArray(buffered_img);
+//			System.out.println((int)data.length);
+			buf.setData(data);
+		    buf.setOffset(0);
+		    buf.setLength((int)data.length);
+		    buf.setFormat(format);
+		    buf.setFlags(buf.getFlags() | buf.FLAG_KEY_FRAME);
+		}
+
+    	
     }
 }

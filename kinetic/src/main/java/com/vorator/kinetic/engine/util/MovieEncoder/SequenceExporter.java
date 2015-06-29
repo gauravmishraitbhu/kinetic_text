@@ -50,7 +50,7 @@ public class SequenceExporter implements BufferedImageSource{
         protected BufferedImage bufferedImg2;
         protected Graphics2D graphicsHandle2;
         protected AffineTransform identity = new AffineTransform();
-        protected boolean updateScreen = false;
+        protected boolean updateScreen = true;
         protected int motionBlur = 0;
         protected double lastTime =  0;
         private float layerAlpha = 1.0f;
@@ -157,7 +157,7 @@ public class SequenceExporter implements BufferedImageSource{
             graphicsHandle1.setBackground(java.awt.Color.white);
             graphicsHandle1.clearRect(0, 0, d.width, d.height);
 
-            if(motionBlur > 1){
+            if(false && motionBlur > 1){
                 graphicsHandle2.setTransform(identity);
                 graphicsHandle2.setBackground(java.awt.Color.white);
                 graphicsHandle2.clearRect(0, 0, d.width, d.height);
